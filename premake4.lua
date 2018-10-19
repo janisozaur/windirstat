@@ -364,6 +364,8 @@ solution (iif(release, slnname, "windirstat"))
         end
         files
         {
+            "3rdparty/ntnative/*.c",
+            "3rdparty/ntnative/*.h",
             "common/hgid.h",
             "common/*.h",
             "common/*.cpp",
@@ -389,12 +391,14 @@ solution (iif(release, slnname, "windirstat"))
         
         vpaths
         {
+            ["Header Files/NT Native/*"] = { "3rdparty/ntnative/*.h" },
             ["Header Files/Common/*"] = { "common/*.h" },
             ["Header Files/Controls/*"] = { "windirstat/Controls/*.h" },
             ["Header Files/Dialogs/*"] = { "windirstat/Dialogs/*.h" },
             ["Header Files/*"] = { "windirstat/*.h" },
             ["Resource Files/Resources/*"] = { "windirstat/res/*.*" },
             ["Resource Files/*"] = { "common/*.rc", "windirstat/*.rc" },
+            ["Source Files/NT Native/*"] = { "3rdparty/ntnative/*.c" },
             ["Source Files/Common/*"] = { "common/*.cpp" },
             ["Source Files/Lua/*"] = { "windirstat/WDS_Lua_C.c" },
             ["Source Files/Controls/*"] = { "windirstat/Controls/*.cpp" },
@@ -432,7 +436,7 @@ solution (iif(release, slnname, "windirstat"))
             buildoptions    {"/Oi", "/Ot"}
 
         configuration {"vs*"}
-            defines         {"WINVER=0x0501", "LUA_REG_NO_WINTRACE", "LUA_REG_NO_HIVEOPS", "LUA_REG_NO_DLL"}
+            defines         {"WINVER=0x0501", "LUA_REG_NO_WINTRACE", "LUA_REG_NO_HIVEOPS", "LUA_REG_NO_DLL", "NTFINDFILE_DYNAMIC"}
 
         configuration {"vs2015 or vs2017"}
             defines         {"_ALLOW_RTCc_IN_STL"}
