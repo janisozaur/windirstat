@@ -6,7 +6,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __PRIV_H_VER__
-#define __PRIV_H_VER__ 2018070910
+#define __PRIV_H_VER__ 2018102318
 #if (defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP)
 #pragma once
 #endif /* Check for "#pragma once" support */
@@ -60,6 +60,26 @@ public:
             (void)PrivSetContextPrivilege(m_lpszPrivilege, FALSE);
         }
         free(m_lpszPrivilege);
+    }
+
+    inline operator bool() const
+    {
+        return m_bEnabled != FALSE;
+    }
+
+    inline bool operator !() const
+    {
+        return m_bEnabled == FALSE;
+    }
+
+    operator LPCWSTR() const
+    {
+        return m_lpszPrivilege;
+    }
+
+    LPCWSTR getName() const
+    {
+        return m_lpszPrivilege;
     }
 private:
     CSnapEnableAssignedPrivilege(CSnapEnableAssignedPrivilege&);
